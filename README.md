@@ -1,9 +1,9 @@
 # docker-template
 
-本仓库主要保存使用`docker`时自定义的一些模版以及使用说明，方便在创建环境时参考使用。
+本仓库主要保存使用`docker`时自定义的一些模版以及使用说明，方便在创建环境时参考。
 
 
-一些基础的知识可以参考手册  https://yeasy.gitbooks.io/docker_practice/content/install
+
 
 ### 常用命令
 
@@ -11,7 +11,7 @@
 ```shell
 #列出已有镜像的信息
 docker images
-docker images -a --列出所有，包含临时文件
+docker images -a 【列出所有，包含临时文件】
 ```
 
 ```shell
@@ -72,4 +72,8 @@ docker image prune -f 【清理临时镜像并且不进行确认提示】
 #创建镜像
 //TODO
 ```
+
+### 参考
+
+https://yeasy.gitbooks.io/docker_practice/content/install
 
