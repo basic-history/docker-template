@@ -16,22 +16,9 @@ docker run \
   jenkinsci/blueocean
 ```
 
-*这个版本包含了blueocean，是一种新的pipeline模式，官网推荐下载*，也可以选择基础版本
+*上面这个版本包含了blueocean，是一种新的pipeline模式，官网推荐下载*
 
-```shell
-docker run \
-  --name jenkins49000 \
-  -u root  \
-  --rm \
-  -d \
-  -p 49000:8080\
-  -p 50000:50000 \
-  -v jenkins-data:/var/jenkins_home \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  jenkins
-```
-
-其中 ` -p 49000:8081` 代表您将通过端口`49000`访问`jekins`。
+其中 `-p 49000:8081` 代表您将通过端口`49000`访问`jekins`。
 
 常规的经验是容器是不保存数据的，解耦数据和容器。
 
@@ -62,8 +49,11 @@ docker run \
 
 #### 多次全新安装需要删除数据卷的内容
 
+`docker rmi a21c0839edeae -v `  删除镜像时也删除数据卷
+
 ### 参考
 
 https://cloud.tencent.com/developer/article/1351330
+
 https://jenkins.io/zh/doc/book/installing/#accessing-the-jenkins-blue-ocean-docker-container
 

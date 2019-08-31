@@ -50,6 +50,12 @@ docker search -f=stars=4 tensorflow 【查找收藏超过4的tensorflow镜像】
 docker rmi myubuntu:latest 【使用标签删除，注意：当这个标签对应的镜像只有一个时真的会被删除】
 docker rmi myubuntu:latest -f 【强制删除，即使有容器依赖它，一般都是先删除容器再删除镜像】
 docker rmi a21c0839edeae 【根据id删除镜像】
+docker rmi a21c0839edeae -v 【根据id删除镜像，同时删除挂载的数据卷，默认是不删除的】
+```
+
+```shell
+#清理镜像
+docker image prune -f 【清理临时镜像并且不进行确认提示】
 ```
 
 ```shell
@@ -61,18 +67,14 @@ docker ps -a
 #删除容器
 docker rm a21c0839edeae 【根据id删除容器】
 docker rm b098c66ef455 9e995983f718 b88bafdf8715 【批量删除】
+docker container prune -f 【强制删除不再运行状态的容器
 ```
-
-```shell
-#清理镜像
-docker image prune -f 【清理临时镜像并且不进行确认提示】
-```
-
 
 ```shell
 #查看容器日志
 docker logs <docker-container-name>
 docker logs jenkins
+docker logs -f 0a1080cf28a4 【查看滚动日志 docker logs --help查看帮助】
 ```
 
 ```shell
@@ -85,41 +87,6 @@ docker port 9f93aee2f592
 docker volume create -d local test 【查看/var/lib/docker/volumn路径发现test文件夹，注意：还会生成一层_data目录】
 ```
 
-### 端口映射/文件挂载/容器互联
-
-在启动容器时，如果不指定对应参数，在容器外部是无法访问容器内的网络应用的。所以一般使用`-p`或者`-P`来进行端口映射。当使用`-P`会随机映射一个49000-49900的端口供外部访问容器内部。
-
-以下以`jenkins`举例：
-
-
-```shell
-docker run \
-  -u root \
-  --rm \
-  -d \
-  -p 49000:8080\
-  -p 50000:50000 \
-  -v jenkins-data:/var/jenkins_home \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  jenkinsci/blueocean
-```
-
-
-其中 ` -p 49000:8081` 代表您将通过端口`49000`访问`jekins`。
-
-常规的经验是容器是不保存数据的，解耦数据和容器。
-
-其中 `-v jenkins-data:/var/jenkins_home` 代表我们会创建一个数据卷，这个数据卷是一个特殊的目录，可以和容器内的目录映射。
-
-
-结果是`/var/lib/docker/volumes/jenkins-data`目录和容器内`/var/jenkins_home`绑定在一起。
-
-访问`jenkins`页面，提示我们`/var/jenkins_home/secrets/initialAdminPassword`寻找密码，我们需要进入到`/var/lib/docker/volumes/jenkins-data/_data/secrets`查看` cat initialAdminPassword `的内容得到密码。
-
-
-下载完成后理论上我们可以通过`curl localhost:49000`访问容器内的`jenkins`，可以试一下，如果能正确返回响应代表`jenkins`已经正常运作了，一般返回的内容是没有权限。
-
-通过公网ip即可访问。
 
 
 ### 加速器
@@ -141,5 +108,6 @@ docker run \
 ### 参考
 
 https://yeasy.gitbooks.io/docker_practice/content/install
+
 https://jenkins.io/zh/doc/book/installing/
 
