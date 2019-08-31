@@ -16,6 +16,20 @@ docker run \
   jenkinsci/blueocean
 ```
 
+*这个版本包含了blueocean，是一种新的pipeline模式，官网推荐下载*，也可以选择基础版本
+
+```shell
+docker run \
+  --name jenkins49000 \
+  -u root  \
+  --rm \
+  -d \
+  -p 49000:8080\
+  -p 50000:50000 \
+  -v jenkins-data:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  jenkins
+```
 
 其中 ` -p 49000:8081` 代表您将通过端口`49000`访问`jekins`。
 
@@ -32,7 +46,7 @@ docker run \
 
 访问`jenkins`页面，提示我们`/var/jenkins_home/secrets/initialAdminPassword`寻找密码，我们需要进入到`/var/lib/docker/volumes/jenkins-data/_data/secrets`查看` cat initialAdminPassword `的内容得到密码。
 
-按照向导安装即可，比较傻瓜。
+按照向导安装即可，比较傻瓜，一般安装完`jenkins`后占用机器内存`300M`。
 
 ### 已知问题
 

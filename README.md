@@ -59,7 +59,7 @@ docker ps -a
 
 ```shell
 #删除容器
-docker rmi a21c0839edeae 【根据id删除容器】
+docker rm a21c0839edeae 【根据id删除容器】
 docker rm b098c66ef455 9e995983f718 b88bafdf8715 【批量删除】
 ```
 
