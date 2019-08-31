@@ -36,8 +36,22 @@ docker run \
 
 ### 已知问题
 
-可否设置`jenkins`启动端口不为8080？
+
+####  设置完成后页面会提示重启，此时会发现容器消失，
+
+原因是我们设置了 ` --rm `，官网的解释是：
+
+> 关闭时自动删除Docker容器（下图为实例）。如果您需要退出Jenkins，这可以保持整洁。
+
+这不会删除我们刚才配置的数据，即`/var/lib/docker/volumes/jenkins-data/_data`的文件不会被删除，所以不用担心刚才的配置无用，设置完成后手动重启容器即可。
+
+
+##### 可否设置`jenkins`启动端口不为8080？
+
 
 ### 参考
 
 https://cloud.tencent.com/developer/article/1351330
+
+<https://jenkins.io/zh/doc/book/installing/#accessing-the-jenkins-blue-ocean-docker-container>
+
