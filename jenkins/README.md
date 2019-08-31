@@ -48,10 +48,9 @@ docker run \
 
 按照向导安装即可，比较傻瓜，一般安装完`jenkins`后占用机器内存`300M`。
 
-### 已知问题
+### QA
 
-
-####  设置完成后页面会提示重启，此时会发现容器消失，
+#### 设置完成后页面会提示重启，此时会发现容器消失
 
 原因是我们设置了 ` --rm `，官网的解释是：
 
@@ -59,13 +58,12 @@ docker run \
 
 这不会删除我们刚才配置的数据，即`/var/lib/docker/volumes/jenkins-data/_data`的文件不会被删除，所以不用担心刚才的配置无用，设置完成后手动重启容器即可。
 
+#### 可否设置`jenkins`启动端口不为8080？
 
-##### 可否设置`jenkins`启动端口不为8080？
-
+#### 多次全新安装需要删除数据卷的内容
 
 ### 参考
 
 https://cloud.tencent.com/developer/article/1351330
-
-<https://jenkins.io/zh/doc/book/installing/#accessing-the-jenkins-blue-ocean-docker-container>
+https://jenkins.io/zh/doc/book/installing/#accessing-the-jenkins-blue-ocean-docker-container
 

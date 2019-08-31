@@ -68,16 +68,6 @@ docker rm b098c66ef455 9e995983f718 b88bafdf8715 【批量删除】
 docker image prune -f 【清理临时镜像并且不进行确认提示】
 ```
 
-```shell
-#创建镜像
-//TODO
-```
-
-
-```shell
-#开启服务
-
-```
 
 ```shell
 #查看容器日志
@@ -92,12 +82,10 @@ docker port 9f93aee2f592
 
 ```shell
 #创建数据卷
-docker volume create -d local test 【查看/var/lib/docker/volumn路径下已经有test文件夹了，注意：还会多生成一层_data目录】
+docker volume create -d local test 【查看/var/lib/docker/volumn路径发现test文件夹，注意：还会生成一层_data目录】
 ```
 
 ### 端口映射/文件挂载/容器互联
-
-#### 1. 从外部访问容器应用
 
 在启动容器时，如果不指定对应参数，在容器外部是无法访问容器内的网络应用的。所以一般使用`-p`或者`-P`来进行端口映射。当使用`-P`会随机映射一个49000-49900的端口供外部访问容器内部。
 
@@ -153,6 +141,5 @@ docker run \
 ### 参考
 
 https://yeasy.gitbooks.io/docker_practice/content/install
-
 https://jenkins.io/zh/doc/book/installing/
 
