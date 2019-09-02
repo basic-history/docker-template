@@ -1,26 +1,21 @@
-# jenkins
+# mysql
 
-[仓库官网](https://hub.docker.com/_/mysql?tab=tags)
 
-### 启动
+直接参考下面的即可，测试通过
+
+
+https://www.cnblogs.com/116970u/p/10869430.html
+
+上面的这个没有设置数据挂载卷以及忽略大小写的配置，可参考下一列的配置更详细
+
+https://blog.51cto.com/binuu/1943176
 
 ```shell
-docker run --name mysql -e MYSQL_ROOT_PASSWORD=123 -d mysql:5.7.27
+docker run -d -e MYSQL_ROOT_PASSWORD=123 --name mysql -v /data/mysql/my.cnf:/etc/mysql/my.cnf -v /data/mysql/data:/var/lib/mysql -p 3306:3306 mysql:5.7 --lower_case_table_names=1
 ```
-开放远程访问权限
+
+这个直接运行还是有问题（似乎和配置文件不存在有关系），下面这个可以直接运行，记得先创建好库和用户
 
 ```shell
-docker exec -it mysql bash
-ALTER USER 'root'@'localhost' IDENTIFIED BY '123';
-#添加远程登录用户
-CREATE USER 'pleuvoir'@'%' IDENTIFIED WITH mysql_native_password BY '123';
-GRANT ALL PRIVILEGES ON *.* TO 'pleuvoir'@'%';
+docker run -d -e MYSQL_ROOT_PASSWORD=123 --name mysql  -v /data/mysql/data:/var/lib/mysql -p 3306:3306 mysql:5.7 --lower_case_table_names=1
 ```
-
-### 参考
-
-https://www.runoob.com/docker/docker-install-mysql.html
-
-https://my.oschina.net/damienchen/blog/1931305
-
-https://hub.docker.com/r/cytopia/mysql-5.7/
